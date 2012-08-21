@@ -9,10 +9,10 @@
 
 ## Install hustler
 Enter the following commands in the terminal.
-* `git clone git://github.com/CaryLandholt/hustler.git`
-* `cd hustler`
+* `git clone git://github.com/CaryLandholt/AngularFun.git`
+* `cd AngularFun`
 * `npm install`
-* `grunt`
+* `grunt` or `"./node_modules/.bin/grunt"` to run it local to the project
 
 You are now ready to run the app.
 However, if you wish to run the app with optimizations (minification, etc.) turned on, enter the following command in the terminal.
