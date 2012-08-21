@@ -95,51 +95,28 @@ module.exports = function (grunt) {
 
 		// optimizes files managed by RequireJS
 		requirejs: {
-			directives: {
-				baseUrl: './dist/scripts/',
-				exclude: ['libs/modernizr'],
-				findNestedDependencies: true,
-				mainConfigFile: './dist/scripts/main.js',
-				name: 'main',
-				optimize: 'none',
-				out: './dist/scripts/scripts.js',
-				preserveLicenseComments: false,
-				wrap: {
-					startFile: './build/inlineDefines.js',
-					end: ';'
-				}
-			},
 			scripts: {
 				baseUrl: './dist/scripts/',
 				exclude: ['libs/modernizr'],
 				findNestedDependencies: true,
+				include: 'requireLib',
 				mainConfigFile: './dist/scripts/main.js',
 				name: 'main',
-				out: './dist/scripts/scripts.{hash}.min.js',
-				preserveLicenseComments: false,
-				wrap: {
-					startFile: './build/inlineDefines.js',
-					end: ';'
+				optimize: 'uglify',
+				out: './dist/scripts/scripts.min.js',
+				paths: {
+					requireLib: 'libs/require'
 				},
-				hash: './dist/scripts/scripts.hash'
+				preserveLicenseComments: false,
+				uglify: {
+					no_mangle: true
+				}
 			},
 			styles: {
 				baseUrl: './dist/styles/',
 				cssIn: './dist/styles/styles.css',
 				optimizeCss: 'standard',
-				out: './dist/styles/styles.{hash}.min.css',
-				hash: './dist/styles/styles.hash'
-			}
-		},
-
-		hash: {
-			scripts: {
-				src: '<%= pkg.dist %>scripts/scripts.js',
-				dest: '<%= pkg.dist %>scripts/scripts.hash'
-			},
-			styles: {
-				src: '<%= pkg.dist %>styles/styles.css',
-				dest: '<%= pkg.dist %>styles/styles.hash'
+				out: './dist/styles/styles.min.css'
 			}
 		},
 
@@ -169,10 +146,10 @@ module.exports = function (grunt) {
 
 	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-less');
-	grunt.loadTasks('build/tasks');
+	grunt.loadNpmTasks('grunt-hustler');
 	grunt.registerTask('core', 'delete coffeeLint coffee copy lint less');
 	grunt.registerTask('bootstrap', 'core template:dev');
 	grunt.registerTask('default', 'bootstrap');
 	grunt.registerTask('dev', 'bootstrap watch');
-	grunt.registerTask('prod', 'core template:directives requirejs:directives hash requirejs:scripts requirejs:styles template:prod');
+	grunt.registerTask('prod', 'core template:directives requirejs template:prod');
 };
