@@ -18,7 +18,8 @@ module.exports = function (grunt) {
 			scripts: {
 				src: '<%= pkg.src %>/scripts/**/*.coffee',
 				indentation: {
-					value: 1
+					value: 1,
+					level: 'error'
 				},
 				max_line_length: {
 					level: 'ignore'
@@ -88,8 +89,7 @@ module.exports = function (grunt) {
 				src: '<config:template.dev.src>',
 				dest: '<config:template.dev.dest>',
 				ext: '<config:template.dev.ext>',
-				environment: 'prod',
-				minify: true
+				environment: 'prod'
 			}
 		},
 
@@ -97,9 +97,9 @@ module.exports = function (grunt) {
 		requirejs: {
 			scripts: {
 				baseUrl: './dist/scripts/',
-				exclude: ['libs/modernizr'],
 				findNestedDependencies: true,
 				include: 'requireLib',
+				logLevel: 0,
 				mainConfigFile: './dist/scripts/main.js',
 				name: 'main',
 				optimize: 'uglify',
@@ -115,6 +115,7 @@ module.exports = function (grunt) {
 			styles: {
 				baseUrl: './dist/styles/',
 				cssIn: './dist/styles/styles.css',
+				logLevel: 0,
 				optimizeCss: 'standard',
 				out: './dist/styles/styles.min.css'
 			}
@@ -138,13 +139,12 @@ module.exports = function (grunt) {
 		server: {
 			app: {
 				src: './server.coffee',
-				port: 3006,
-				watch: true
+				port: 3012,
+				watch: './routes.coffee'
 			}
 		}
 	});
 
-	grunt.loadNpmTasks('grunt-exec');
 	grunt.loadNpmTasks('grunt-less');
 	grunt.loadNpmTasks('grunt-hustler');
 	grunt.registerTask('core', 'delete coffeeLint coffee copy lint less');

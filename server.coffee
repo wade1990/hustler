@@ -1,30 +1,17 @@
-###global require, __dirname, process###
+express = require 'express'
+routes = require './routes'
+dir = "#{__dirname}/dist"
+port = process.argv.splice(2)[0] ? 3005
+app = express()
 
-((express, dir, port = 3005) ->
-	dir += '/dist'
+app.configure ->
+	app.use express.logger 'dev'
+	app.use express.bodyParser()
+	app.use express.methodOverride()
+	app.use express.errorHandler()
+	app.use express.static dir
+	app.use app.router
+	routes app
 
-	app = express.createServer()
-
-	getUrl = ->
-		"http://localhost:#{port}"
-
-	app.configure ->
-		app.set 'view options',
-			layout: false
-
-		app.use express.bodyParser()
-		app.use express.static dir
-		app.use app.router
-
-		app.engine '.html', (str, options) ->
-			(locals) ->
-				str
-
-		app.get '/', (req, res) ->
-			res.render "#{dir}/index.html"
-
-		app.listen port, ->
-			console.log "open your browser to the url below"
-			console.log getUrl()
-
-)(require('express'), __dirname, process.argv.splice(2)[0])
+app.listen port, ->
+	console.log "started web server at http://localhost:#{port}"
