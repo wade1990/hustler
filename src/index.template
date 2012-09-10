@@ -25,7 +25,8 @@
 	</head>
 	<body>
 		<div class="container">
-			Congrats!  You're up and running!
+			<h1>Congrats!</h1>
+			<p>You're up and running in <%= config.environment %>!</p>
 		</div>
 	</body>
 </html>
