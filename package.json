@@ -5,11 +5,11 @@
 	"dist": "./dist/",
 	"main": "./server.coffee",
 	"dependencies": {
-		"express": "~3.0.0",
-		"grunt": "~0.3.12",
-		"grunt-hustler": "~0.5.3",
+		"express": "~4.15.3",
+		"grunt": "~1.0.1",
+		"grunt-hustler": "~4.0.6",
 		"grunt-less": "~0.1.5",
-		"nodemon": "~0.6.23"
+		"nodemon": "~1.11.0"
 	},
 	"engine": "node >= 0.8.1"
 }
