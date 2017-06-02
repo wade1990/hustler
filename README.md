@@ -1,4 +1,6 @@
 # hustler
+
+[![Greenkeeper badge](https://badges.greenkeeper.io/CaryLandholt/hustler.svg)](https://greenkeeper.io/)
 *By Cary Landholt*
 
 ## Prerequisites
